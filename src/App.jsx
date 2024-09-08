@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
+import ContactUs from "./components/ContactUs";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Navbar />
       <Home />
       <AboutUs />
+      <ContactUs />
     </div>
   );
 }
