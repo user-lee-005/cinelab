@@ -59,7 +59,7 @@ const Testimonials = () => {
 
   return (
     <section
-      id="testimonials"
+      id="client-testimonials"
       ref={testimonialsRef}
       className="relative flex flex-col items-center justify-around min-h-fit bg-gray-900 text-white py-28"
     >

@@ -11,8 +11,8 @@ const AboutUs = () => {
 
   return (
     <section
+      className="relative flex items-center justify-around min-h-screen bg-gray-900 text-white overflow-hidden pb-20 pt-20"
       id="about-us"
-      className="relative flex items-center justify-around min-h-fit bg-gray-900 text-white overflow-hidden pb-20"
     >
       <img
         src="/team-image.jpg"

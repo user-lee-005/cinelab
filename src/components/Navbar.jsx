@@ -12,7 +12,9 @@ const Navbar = () => {
   return (
     <nav className="bg-custom-gradient w-full fixed top-0 left-0 z-50 animate-fade-in-nav">
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <img src="/Cinelab Logo.png" alt="Logo" className="w-20" />
+        <a href="#home">
+          <img src="/Cinelab Logo.png" alt="Logo" className="w-20" />
+        </a>
         <div className="md:hidden">
           <FontAwesomeIcon
             icon={showMenu ? faX : faBars}

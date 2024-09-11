@@ -1,0 +1,136 @@
+import {
+  faFacebook,
+  faInstagram,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import { faSquareXing } from "@fortawesome/free-brands-svg-icons/faSquareXing";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+
+const Footer = () => {
+  return (
+    <footer className="bg-gray-800 text-white py-4">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-6">
+        {/* Logo and Description
+        <div className="mb-6 md:mb-0">
+          <h1 className="text-2xl font-bold">Cinelab</h1>
+          <p className="text-sm mt-2">
+            Bringing your visual stories to life with expert color grading and
+            editing.
+          </p>
+        </div> */}
+
+        {/* Navigation Links
+        <nav className="mb-6 md:mb-0">
+          <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6">
+            <li>
+              <a href="#home" className="hover:underline">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#about" className="hover:underline">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="#services" className="hover:underline">
+                Services
+              </a>
+            </li>
+            <li>
+              <a href="#testimonials" className="hover:underline">
+                Testimonials
+              </a>
+            </li>
+            <li>
+              <a href="#contact" className="hover:underline">
+                Contact
+              </a>
+            </li>
+          </ul>
+        </nav> */}
+
+        {/* Contact Information */}
+        <div className="mb-6 md:mb-0 flex flex-col">
+          <h3 className="text-lg font-semibold">Contact Us</h3>
+          <p className="text-sm mt-2">
+            123 Color Street, Suite 100, Color City, CL 12345
+          </p>
+          <div className="flex space-x-4">
+            <p className="text-sm mt-1">
+              Email:{" "}
+              <a href="mailto:info@cinelab.com" className="hover:underline">
+                info@cinelab.com
+              </a>
+            </p>
+            <p className="text-sm mt-1">
+              Phone:{" "}
+              <a href="tel:+1234567890" className="hover:underline">
+                (123) 456-7890
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <p className="text-sm pr-48">
+          &copy; 2024 Cinelab. All rights reserved.
+        </p>
+
+        {/* Social Media Links */}
+        <div className="flex space-x-4">
+          <div className="relative group border-2 rounded-md">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block p-2 relative"
+            >
+              <FontAwesomeIcon
+                icon={faFacebook}
+                size="2x"
+                className="relative z-10"
+              />
+              <span className="absolute inset-0 bg-blue-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-md"></span>
+            </a>
+          </div>
+          <div className="relative group border-2 rounded-md">
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block p-2 relative"
+            >
+              <FontAwesomeIcon
+                icon={faTwitter}
+                size="2x"
+                className="relative z-10"
+              />
+              <span className="absolute inset-0 bg-blue-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-md"></span>
+            </a>
+          </div>
+          <div className="relative group border-2 rounded-md">
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block p-2 relative"
+            >
+              <FontAwesomeIcon
+                icon={faInstagram}
+                size="2x"
+                className="relative z-10"
+              />
+              <span className="absolute inset-0 bg-pink-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-md"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      {/* 
+      <div className="text-center mt-8 border-t border-gray-700 pt-4">
+      </div> */}
+    </footer>
+  );
+};
+
+export default Footer;

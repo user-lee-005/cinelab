@@ -26,7 +26,7 @@ const ContactUs = () => {
     <section
       id="contact-us"
       ref={contactUsRef}
-      className="relative flex items-center justify-around min-h-fit bg-gray-900 w-full text-white overflow-hidden"
+      className="relative flex items-center justify-around min-h-fit bg-gray-900 w-full text-white overflow-hidden pt-20"
     >
       <div className="relative z-10 flex flex-col items-start justify-center px-8 space-y-6">
         <h2
