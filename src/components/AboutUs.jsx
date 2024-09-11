@@ -12,7 +12,7 @@ const AboutUs = () => {
   return (
     <section
       id="about-us"
-      className="relative flex items-center justify-around min-h-screen bg-gray-900 text-white overflow-hidden"
+      className="relative flex items-center justify-around min-h-fit bg-gray-900 text-white overflow-hidden pb-20"
     >
       <img
         src="/team-image.jpg"
