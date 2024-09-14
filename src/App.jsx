@@ -6,6 +6,8 @@ import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import ClientTestimonials from "./components/ClientTestimonials";
 import Footer from "./components/Footer";
+import AddMember from "./components/AddMember";
+import Works from "./components/Works";
 
 function App() {
   return (
@@ -13,8 +15,10 @@ function App() {
       <Navbar />
       <Home />
       <AboutUs />
-      <ContactUs />
+      <Works />
       <ClientTestimonials />
+      <ContactUs />
+      {/* <AddMember /> */}
       <Footer />
     </div>
   );

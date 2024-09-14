@@ -3,7 +3,11 @@ import {
   faInstagram,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { faSquareXing } from "@fortawesome/free-brands-svg-icons/faSquareXing";
+import {
+  faEnvelope,
+  faHouse,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
@@ -55,19 +59,23 @@ const Footer = () => {
         <div className="mb-6 md:mb-0 flex flex-col">
           <h3 className="text-lg font-semibold">Contact Us</h3>
           <p className="text-sm mt-2">
-            123 Color Street, Suite 100, Color City, CL 12345
+            <FontAwesomeIcon icon={faHouse} className="mr-2" />
+            Kuniamuthur, Coimbatore, Tamil Nadu - 641008
           </p>
           <div className="flex space-x-4">
             <p className="text-sm mt-1">
-              Email:{" "}
-              <a href="mailto:info@cinelab.com" className="hover:underline">
-                info@cinelab.com
+              <FontAwesomeIcon icon={faEnvelope} />
+              <a
+                href="mailto:info.cinelab@gmail.com"
+                className="hover:underline ml-2"
+              >
+                info.cinelab@gmail.com
               </a>
             </p>
             <p className="text-sm mt-1">
-              Phone:{" "}
-              <a href="tel:+1234567890" className="hover:underline">
-                (123) 456-7890
+              <FontAwesomeIcon icon={faPhone} />
+              <a href="tel:+1234567890" className="hover:underline ml-2">
+                +91-9080675237
               </a>
             </p>
           </div>
@@ -79,7 +87,7 @@ const Footer = () => {
 
         {/* Social Media Links */}
         <div className="flex space-x-4">
-          <div className="relative group border-2 rounded-md">
+          {/* <div className="relative group border-2 rounded-md">
             <a
               href="https://facebook.com"
               target="_blank"
@@ -108,10 +116,10 @@ const Footer = () => {
               />
               <span className="absolute inset-0 bg-blue-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-md"></span>
             </a>
-          </div>
+          </div> */}
           <div className="relative group border-2 rounded-md">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/_.cinelab._/"
               target="_blank"
               rel="noopener noreferrer"
               className="block p-2 relative"
