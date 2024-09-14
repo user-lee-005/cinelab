@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { getTeamMembersList } from "../service/Service";
 
 const AboutUs = () => {
   const { ref: aboutUsRef, inView: isAboutUsVisible } = useInView({
