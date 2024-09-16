@@ -19,21 +19,22 @@ const editedVideos = [
 
 const gradedVideos = [
   {
-    src: "/path/to/graded-video1.mp4",
-    title: "Graded Video 1",
-    description: "Description of Graded Video 1",
+    src: "/Videos/FeinWithWatermark.mp4",
+    title: "Log to Grade",
+    description:
+      "This is a drone shot that we changed from the log footage to a graded one elevating the feel of the scene and the scenary",
   },
-  {
-    src: "/path/to/graded-video2.mp4",
-    title: "Graded Video 2",
-    description: "Description of Graded Video 2",
-  },
+  // {
+  //   src: "/path/to/graded-video2.mp4",
+  //   title: "Graded Video 2",
+  //   description: "Description of Graded Video 2",
+  // },
   // Add more videos as needed
 ];
 
 const Works = () => {
   return (
-    <div>
+    <div id="our-work">
       <VideoCarousel
         videos={editedVideos}
         title="Edited Videos"

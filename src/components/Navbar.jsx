@@ -30,11 +30,18 @@ const Navbar = () => {
           <a href="#about-us" className="hover:text-gray-400">
             About Us
           </a>
-          <a href="#contact-us" className="hover:text-gray-400">
-            Contact Us
+          <a
+            href="#our-work"
+            className="hover:text-gray-400"
+            onClick={toggleMenu}
+          >
+            Our Work
           </a>
           <a href="#client-testimonials" className="hover:text-gray-400">
             Client Testimonials
+          </a>
+          <a href="#contact-us" className="hover:text-gray-400">
+            Contact Us
           </a>
         </div>
       </div>
@@ -56,11 +63,11 @@ const Navbar = () => {
             About Us
           </a>
           <a
-            href="#contact-us"
+            href="#our-work"
             className="block px-4 py-2 text-sm hover:bg-gray-600"
             onClick={toggleMenu}
           >
-            Contact Us
+            Our Work
           </a>
           <a
             href="#client-testimonials"
@@ -68,6 +75,13 @@ const Navbar = () => {
             onClick={toggleMenu}
           >
             Client Testimonials
+          </a>
+          <a
+            href="#contact-us"
+            className="block px-4 py-2 text-sm hover:bg-gray-600"
+            onClick={toggleMenu}
+          >
+            Contact Us
           </a>
         </div>
       )}
