@@ -26,39 +26,45 @@ const AboutUs = () => {
 
   return (
     <section
-      className="relative flex items-center justify-around min-h-screen bg-gray-900 text-white overflow-hidden pb-20 pt-20"
+      className="relative flex flex-col md:flex-row items-center justify-around min-h-screen bg-indigo-50 text-gray-900 overflow-hidden pb-20 pt-20"
       id="about-us"
     >
-      <div>
+      {/* Team Members Section */}
+      <div className="flex flex-col items-center md:items-start">
         <h2
-          className={`text-4xl font-extrabold leading-tight ${
-            isAboutUsVisible ? "animate-slide-in-left" : "opacity-0"
+          className={`text-4xl font-extrabold leading-tight transition-opacity duration-1000 ${
+            isAboutUsVisible ? "opacity-100 animate-slide-in-left" : "opacity-0"
           }`}
         >
           Our Team
         </h2>
         {teamMembers.map((member, index) => (
-          <div key={`member-${index + 1}`}>
+          <div
+            key={`member-${index + 1}`}
+            className="flex flex-col items-center text-center mt-8 md:mt-12"
+          >
             <div className="relative inline-block">
               <img
                 src={`/${member.image}`}
-                alt="Leela"
-                className={`w-96 mt-12 transform transition-transform block duration-1000 hover:scale-105 ${
+                alt={member.name}
+                className={`w-48 sm:w-64 md:w-80 transition-transform duration-1000 hover:scale-105 ${
                   isAboutUsVisible ? "animate-slide-up" : "opacity-0"
                 }`}
               />
               <div className="absolute inset-0 bg-white bg-opacity-0"></div>
             </div>
-            <p>{member.name}</p>
-            <p>{member.role}</p>
+            <p className="mt-4 text-lg font-semibold">{member.name}</p>
+            <p className="text-sm text-gray-600">{member.role}</p>
           </div>
         ))}
       </div>
-      <div className="flex flex-col">
+
+      {/* About Us and Why Us Section */}
+      <div className="flex flex-col md:w-1/2 space-y-12">
         <div
           ref={aboutUsRef}
-          className={`relative z-10 flex flex-col items-start justify-center px-8 max-w-2xl w-full mb-12 ${
-            isAboutUsVisible ? "animate-fade-in" : "opacity-0"
+          className={`relative z-10 flex flex-col items-start justify-center px-8 max-w-2xl w-full transition-opacity duration-1000 ${
+            isAboutUsVisible ? "opacity-100 animate-fade-in" : "opacity-0"
           }`}
         >
           <h2
@@ -68,11 +74,7 @@ const AboutUs = () => {
           >
             About Us
           </h2>
-          <ul
-            className={`list-disc list-inside text-lg leading-relaxed space-y-3 ${
-              isAboutUsVisible ? "animate-fade-in-para" : "opacity-0"
-            }`}
-          >
+          <ul className="list-disc list-inside text-lg leading-relaxed space-y-3">
             <li>Experts in cinematic color grading and video editing</li>
             <li>Transforming raw footage into breathtaking visual stories</li>
             <li>Enhancing your content with state-of-the-art techniques</li>
@@ -83,8 +85,8 @@ const AboutUs = () => {
 
         <div
           ref={whyUsRef}
-          className={`relative z-10 flex flex-col items-start justify-center px-8 max-w-2xl w-full ${
-            isWhyUsVisible ? "animate-fade-in" : "opacity-0"
+          className={`relative z-10 flex flex-col items-start justify-center px-8 max-w-2xl w-full transition-opacity duration-1000 ${
+            isWhyUsVisible ? "opacity-100 animate-fade-in" : "opacity-0"
           }`}
         >
           <h2
@@ -94,11 +96,7 @@ const AboutUs = () => {
           >
             Why Us
           </h2>
-          <ul
-            className={`list-disc list-inside text-lg leading-relaxed space-y-3 ${
-              isWhyUsVisible ? "animate-fade-in-para" : "opacity-0"
-            }`}
-          >
+          <ul className="list-disc list-inside text-lg leading-relaxed space-y-3">
             <li>Industry-leading expertise in color grading and editing</li>
             <li>Collaborative approach to ensure your vision is achieved</li>
             <li>

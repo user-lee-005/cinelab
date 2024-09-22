@@ -25,22 +25,22 @@ const Home = () => {
   return (
     <section
       id="home"
-      className="relative flex items-center justify-around min-h-screen bg-gray-900 text-white overflow-hidden"
+      className="relative flex flex-col-reverse md:flex-row items-center justify-around min-h-screen bg-gray-100 text-gray-800 overflow-hidden px-4 sm:px-6 lg:px-8"
     >
       <div
         ref={homeRef}
-        className="relative z-10 flex flex-col items-start justify-center px-8 max-w-2xl w-full"
+        className="relative z-10 flex flex-col items-center md:items-start justify-center px-4 sm:px-6 lg:px-8 max-w-2xl w-full mb-6 md:mb-0"
       >
         <h1
-          className={`text-5xl font-extrabold mb-4 leading-tight ${
-            isHomeVisible ? "animate-fade-in-title" : "opactiy-0"
+          className={`text-4xl sm:text-5xl font-extrabold mb-4 leading-tight transition-opacity duration-1000 ${
+            isHomeVisible ? "opacity-100 animate-fade-in-title" : "opacity-0"
           }`}
         >
           Welcome to Cinelab!
         </h1>
         <p
-          className={`text-xl leading-relaxed ${
-            isHomeVisible ? "animate-fade-in-para" : "opacity-0"
+          className={`text-base sm:text-xl leading-relaxed transition-opacity duration-1000 ${
+            isHomeVisible ? "opacity-100 animate-fade-in-para" : "opacity-0"
           }`}
         >
           At Cinelab, we bring your visual storytelling to life with our
@@ -55,10 +55,10 @@ const Home = () => {
       <img
         src="/Cinelab Logo.png"
         alt="Cinelab Logo"
-        className={`w-96 mb-6 ${
+        className={`w-64 sm:w-96 transition-transform duration-1000 ${
           isHomeVisible
-            ? "animate-slide-up transform transition-transform duration-1000"
-            : "opacity-0"
+            ? "transform translate-y-0 opacity-100 animate-slide-up"
+            : "opacity-0 translate-y-4"
         } hover:scale-110`}
       />
     </section>

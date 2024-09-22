@@ -84,17 +84,21 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4"
+              className="flex-shrink-0 w-full sm:w-2/3 md:w-1/2 lg:w-1/3 p-3 sm:p-4"
             >
-              <div className="relative flex flex-col items-center bg-gray-800 p-8 rounded-lg shadow-lg transition-transform duration-1000 hover:scale-105">
+              <div className="relative flex flex-col items-center bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg transition-transform duration-1000 hover:scale-105">
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className="w-24 h-24 rounded-full mb-4 object-cover border-4 border-blue-700"
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full mb-3 sm:mb-4 object-cover border-4 border-blue-700"
                 />
-                <blockquote className="text-lg italic mb-4">{`"${testimonial.quote}"`}</blockquote>
-                <h3 className="text-xl font-semibold">{testimonial.name}</h3>
-                <p className="text-sm text-gray-400">{testimonial.role}</p>
+                <blockquote className="text-sm sm:text-lg italic mb-3 sm:mb-4">{`"${testimonial.quote}"`}</blockquote>
+                <h3 className="text-base sm:text-xl font-semibold">
+                  {testimonial.name}
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-400">
+                  {testimonial.role}
+                </p>
               </div>
             </div>
           ))}
