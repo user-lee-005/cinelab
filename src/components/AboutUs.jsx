@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { getTeamMembersList } from "../service/Service";
 
 const AboutUs = () => {
   const { ref: aboutUsRef, inView: isAboutUsVisible } = useInView({
@@ -9,19 +10,28 @@ const AboutUs = () => {
     threshold: 0.1,
   });
 
-  const teamMembersList = [
-    {
-      name: "Leela Venkatesh V",
-      role: "Founder, Cheif Colorist",
-      image: "Leela.jpg",
-    },
-  ];
+  // const teamMembersList = [
+  //   {
+  //     name: "Leela Venkatesh V",
+  //     role: "Founder, Cheif Colorist",
+  //     image: "Leela.jpg",
+  //   },
+  // ];
 
   const [teamMembers, setTeamMembers] = useState([]);
 
   useEffect(() => {
-    // setTeamMembers(getTeamMembersList());
-    setTeamMembers(teamMembersList);
+    const fetchTeamMembers = async () => {
+      try {
+        const teamMembersList = await getTeamMembersList();
+        console.log(teamMembers);
+        setTeamMembers(teamMembersList || []);
+      } catch (error) {
+        console.error("Error fetching team members", error);
+      }
+    };
+
+    fetchTeamMembers();
   }, []);
 
   return (
@@ -37,22 +47,24 @@ const AboutUs = () => {
         >
           Our Team
         </h2>
-        {teamMembers.map((member, index) => (
-          <div key={`member-${index + 1}`}>
-            <div className="relative inline-block">
-              <img
-                src={`/${member.image}`}
-                alt="Leela"
-                className={`w-96 mt-12 transform transition-transform block duration-1000 hover:scale-105 ${
-                  isAboutUsVisible ? "animate-slide-up" : "opacity-0"
-                }`}
-              />
-              <div className="absolute inset-0 bg-white bg-opacity-0"></div>
+        {teamMembers?.length > 0 &&
+          teamMembers?.map((member, index) => (
+            <div key={`member-${index + 1}`}>
+              <div className="relative inline-block">
+                <img
+                  // src={`/${member.image}`}
+                  src={member.image}
+                  alt={member.name}
+                  className={`w-96 mt-12 transform transition-transform block duration-1000 hover:scale-105 ${
+                    isAboutUsVisible ? "animate-slide-up" : "opacity-0"
+                  }`}
+                />
+                <div className="absolute inset-0 bg-white bg-opacity-0"></div>
+              </div>
+              <p>{member.name}</p>
+              <p>{member.role}</p>
             </div>
-            <p>{member.name}</p>
-            <p>{member.role}</p>
-          </div>
-        ))}
+          ))}
       </div>
       <div className="flex flex-col">
         <div

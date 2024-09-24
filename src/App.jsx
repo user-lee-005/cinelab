@@ -18,7 +18,7 @@ function App() {
       <Works />
       <ClientTestimonials />
       <ContactUs />
-      {/* <AddMember /> */}
+      <AddMember />
       <Footer />
     </div>
   );
