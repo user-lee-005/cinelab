@@ -18,6 +18,7 @@ function App() {
       <Works />
       {/* <ClientTestimonials /> */}
       <ContactUs />
+      <AddMember />
       <Footer />
     </div>
   );

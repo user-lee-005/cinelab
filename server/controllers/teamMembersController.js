@@ -1,10 +1,22 @@
 const { TeamMember } = require("../models");
+const formidable = require("formidable");
+const fs = require("fs");
 
 exports.getAllTeamMembers = async (req, res) => {
   try {
     const teamMembers = await TeamMember.findAll();
-    if (teamMembers.length > 0) {
-      res.json(teamMembers);
+    const membersWithImages = await Promise.all(
+      teamMembers.map(async (member) => {
+        const imageBuffer = member.image; 
+        const base64Image = imageBuffer.toString("base64"); // Convert BLOB to Base64
+        return {
+          ...member.dataValues,
+          image: `data:image/jpg;base64,${base64Image}`, // Prepend Base64 data with proper header
+        };
+      })
+    );
+    if (membersWithImages.length > 0) {
+      res.json(membersWithImages);
     } else {
       res.json([]);
     }
@@ -14,7 +26,6 @@ exports.getAllTeamMembers = async (req, res) => {
 };
 
 exports.saveTeamMember = async (req, res) => {
-  console.log("Method Called");
   const form = new formidable.IncomingForm();
 
   form.parse(req, async (err, fields, files) => {
@@ -29,9 +40,9 @@ exports.saveTeamMember = async (req, res) => {
       const image = fs.readFileSync(file.filepath);
 
       const teamMember = await TeamMember.create({
-        name,
-        role,
-        image: image,
+        name: name[0],
+        role: role[0],
+        image,
       });
 
       res

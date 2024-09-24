@@ -8,18 +8,18 @@ const corsConfig = require("./config/corsConfig");
 const app = express();
 const port = process.env.PORT || 3001;
 
-// app.use(corsConfig);
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://cinelab.vercel.app",
-      "http://127.0.0.1:3000",
-    ],
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+app.use(corsConfig);
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:3000",
+//       "https://cinelab.vercel.app",
+//       "http://127.0.0.1:3000",
+//     ],
+//     methods: ["GET", "POST"],
+//     allowedHeaders: ["Content-Type"],
+//   })
+// );
 app.use(bodyParser.json());
 app.use("/api", teamMembersRoutes);
 
