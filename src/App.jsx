@@ -8,6 +8,7 @@ import ClientTestimonials from "./components/ClientTestimonials";
 import Footer from "./components/Footer";
 import AddMember from "./components/AddMember";
 import Works from "./components/Works";
+import ShowMembers from "./components/ShowMembers";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <ClientTestimonials />
       <ContactUs />
       <AddMember />
+      <ShowMembers />
       <Footer />
     </div>
   );
