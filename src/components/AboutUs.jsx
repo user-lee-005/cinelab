@@ -25,7 +25,6 @@ const AboutUs = () => {
     const fetchTeamMembers = async () => {
       try {
         const teamMembersList = await getTeamMembersList();
-        console.log(teamMembers);
         setTeamMembers(teamMembersList || []);
       } catch (error) {
         console.error("Error fetching team members", error);
@@ -33,7 +32,7 @@ const AboutUs = () => {
     };
 
     fetchTeamMembers();
-  }, [teamMembers]);
+  }, []);
 
   return (
     <section

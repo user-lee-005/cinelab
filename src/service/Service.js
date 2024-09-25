@@ -1,5 +1,3 @@
-// src/services/teamService.js
-
 import axios from "axios";
 
 // Use environment variable for the base URL
@@ -27,6 +25,36 @@ export const saveTeamMembers = (payload, contentType) => {
     .then((response) => response.data)
     .catch((error) => {
       console.error("There was an error saving the team member!", error);
+      throw error;
+    });
+};
+
+// Function to update an existing team member
+export const updateTeamMember = (id, payload, contentType) => {
+  return axios
+    .put(`${BASE_URL}/editTeamMember/${id}`, payload, {
+      headers: { "Content-Type": contentType },
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error(
+        `There was an error updating the team member with id ${id}!`,
+        error
+      );
+      throw error;
+    });
+};
+
+// Function to delete a team member
+export const deleteTeamMember = (id) => {
+  return axios
+    .delete(`${BASE_URL}/deleteTeamMember/${id}`)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error(
+        `There was an error deleting the team member with id ${id}!`,
+        error
+      );
       throw error;
     });
 };
