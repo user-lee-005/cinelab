@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { getTeamMembersList } from "../service/Service";
+import TeamCarousel from "./TeamCarousel";
 
 const AboutUs = () => {
   const { ref: aboutUsRef, inView: isAboutUsVisible } = useInView({
@@ -32,40 +33,17 @@ const AboutUs = () => {
     };
 
     fetchTeamMembers();
-  }, []);
+  }, [teamMembers]);
 
   return (
     <section
       className="relative flex items-center justify-around min-h-screen bg-gray-900 text-white overflow-hidden pb-20 pt-20"
       id="about-us"
     >
-      <div>
-        <h2
-          className={`text-4xl font-extrabold leading-tight ${
-            isAboutUsVisible ? "animate-slide-in-left" : "opacity-0"
-          }`}
-        >
-          Our Team
-        </h2>
-        {teamMembers?.length > 0 &&
-          teamMembers?.map((member, index) => (
-            <div key={`member-${index + 1}`}>
-              <div className="relative inline-block">
-                <img
-                  // src={`/${member.image}`}
-                  src={member.image}
-                  alt={member.name}
-                  className={`w-96 mt-12 transform transition-transform block duration-1000 hover:scale-105 ${
-                    isAboutUsVisible ? "animate-slide-up" : "opacity-0"
-                  }`}
-                />
-                <div className="absolute inset-0 bg-white bg-opacity-0"></div>
-              </div>
-              <p>{member.name}</p>
-              <p>{member.role}</p>
-            </div>
-          ))}
-      </div>
+      <TeamCarousel
+        teamMembers={teamMembers}
+        isAboutUsVisible={isAboutUsVisible}
+      />
       <div className="flex flex-col">
         <div
           ref={aboutUsRef}
