@@ -1,6 +1,45 @@
 const { TeamMember, ClientInfo } = require("../models");
 const formidable = require("formidable");
 const fs = require("fs");
+const nodemailer = require("nodemailer");
+
+const sendEmail = async (client) => {
+  try {
+    // Create a transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      service: "gmail", // You can use any other email service
+      auth: {
+        user: "cinelabmail@gmail.com", // Your email address
+        pass: "hzgqpwcixywurike", // Your email password or app-specific password
+      },
+      debug: true,
+    });
+
+    // Setup email data
+    let mailOptions = {
+      from: `"Website-${client.id}" cinelabmail@gmail.com`,
+      to: "info.cinelab05@gmail.com", // List of recipients (this is where you put the email you want to send to)
+      subject: "New Client Details Submitted", // Subject line
+      text: `Client Details:
+      Name: ${client.name}
+      Email: ${client.email}
+      Message: ${client.message}`, // Plain text body
+      html: `<p><b>Client Details:</b></p>
+      <p><b>Name:</b> ${client.name}</p>
+      <p><b>Email:</b> ${client.email}</p>
+      <p><b>Message:</b> ${client.message}</p>`, // HTML body
+    };
+
+    // Send mail
+    let info = await transporter.sendMail(mailOptions);
+
+    console.log("Message sent: %s", info.messageId);
+    return info.messageId;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw error;
+  }
+};
 
 exports.getAllTeamMembers = async (req, res) => {
   try {
@@ -135,6 +174,8 @@ exports.saveClientDetails = async (req, res) => {
       email,
       message,
     });
+
+    await sendEmail(client);
 
     // Send success response
     res.status(201).json({
