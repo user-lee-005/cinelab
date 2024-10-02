@@ -1,4 +1,4 @@
-const { TeamMember } = require("../models");
+const { TeamMember, ClientInfo } = require("../models");
 const formidable = require("formidable");
 const fs = require("fs");
 
@@ -116,5 +116,36 @@ exports.deleteTeamMember = async (req, res) => {
     res.status(200).json({ message: "Team member deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+exports.saveClientDetails = async (req, res) => {
+  try {
+    // Destructure the data from the request body
+    const { name, email, message } = req.body;
+
+    // Validate required fields
+    if (!name || !email) {
+      return res.status(400).json({ error: "Name and email are required." });
+    }
+
+    // Save the client details to the database
+    const client = await ClientInfo.create({
+      name,
+      email,
+      message,
+    });
+
+    // Send success response
+    res.status(201).json({
+      message: "Client details saved successfully",
+      client,
+    });
+  } catch (error) {
+    // Handle errors (e.g., database issues)
+    console.error("Error saving client details:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while saving client details." });
   }
 };

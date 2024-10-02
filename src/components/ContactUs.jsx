@@ -7,17 +7,23 @@ const ContactUs = () => {
     threshold: 0.1,
   });
 
-  const [nameFocused, setNameFocused] = useState(false);
-  const [emailFocused, setEmailFocused] = useState(false);
-  const [messageFocused, setMessageFocused] = useState(false);
-
+  // State for input fields
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleFocus = (setFocused) => (e) => {
-    if (e.target.value !== "") {
-      setFocused(true);
+  // State for focus animation
+  const [nameFocused, setNameFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [messageFocused, setMessageFocused] = useState(false);
+
+  const handleValueChange = (inputField) => (e) => {
+    if (inputField === "name") {
+      setName(e.target.value);
+    } else if (inputField === "email") {
+      setEmail(e.target.value);
+    } else if (inputField === "message") {
+      setMessage(e.target.value);
     }
   };
 
@@ -27,32 +33,43 @@ const ContactUs = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent the default form submission
 
-    const templateParams = {
-      from_name: name,
-      to_Name: "Cinelab",
-      message: JSON.stringify({ message, email }),
-    };
+    // Simple validation
+    if (!name || !email) {
+      alert("Name and email are required.");
+      return;
+    }
 
-    emailjs
-      .send(
-        "service_r0jkfra",
-        "template_2v2qlty",
-        templateParams,
-        "mveWdrg-rKJ4M6I34"
-      )
-      .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-          alert("Message sent successfully!");
+    const data = { name, email, message };
+
+    try {
+      const response = await fetch("http://127.0.0.1:3001/api/saveClientInfo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        (err) => {
-          console.error("FAILED...", err);
-          alert("Failed to send message. Please try again.");
-        }
-      );
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert("Client details saved successfully!");
+        console.log("Saved client:", result);
+
+        // Reset form fields
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.error}`);
+      }
+    } catch (error) {
+      console.error("Error saving client details:", error);
+      alert("An error occurred while saving the client details.");
+    }
   };
 
   return (
@@ -79,6 +96,7 @@ const ContactUs = () => {
           have a question, feel free to get in touch.
         </p>
         <form
+          onSubmit={handleSubmit}
           className={`w-full ${
             isContactUsVisible ? "animate-slide-in-left" : "opacity-0"
           }`}
@@ -98,14 +116,11 @@ const ContactUs = () => {
               <input
                 type="text"
                 id="name"
+                value={name}
                 onFocus={() => setNameFocused(true)}
                 onBlur={handleBlur(setNameFocused)}
-                onChange={(e) => {
-                  handleFocus(setNameFocused);
-                  setName(e.target.value);
-                }}
-                value={name}
-                className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400 text-sm"
+                onChange={handleValueChange("name")}
+                className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400"
                 placeholder={nameFocused && "Enter your name"}
               />
             </div>
@@ -124,14 +139,11 @@ const ContactUs = () => {
               <input
                 type="email"
                 id="email"
+                value={email}
                 onFocus={() => setEmailFocused(true)}
                 onBlur={handleBlur(setEmailFocused)}
-                onChange={(e) => {
-                  handleFocus(setEmailFocused);
-                  setEmail(e.target.value);
-                }}
-                value={email}
-                className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400 text-sm"
+                onChange={handleValueChange("email")}
+                className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400"
                 placeholder={emailFocused && "Enter your email"}
               />
             </div>
@@ -151,14 +163,11 @@ const ContactUs = () => {
             <textarea
               id="message"
               rows="4"
+              value={message}
               onFocus={() => setMessageFocused(true)}
               onBlur={handleBlur(setMessageFocused)}
-              onChange={(e) => {
-                handleFocus(setMessageFocused);
-                setMessage(e.target.value);
-              }}
-              value={message}
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400 text-sm"
+              onChange={handleValueChange("message")}
+              className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400"
               placeholder={messageFocused && "Your message"}
             />
           </div>

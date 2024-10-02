@@ -17,6 +17,7 @@ const db = {
   sequelize,
   Sequelize,
   TeamMember: require("./TeamMember")(sequelize, DataTypes),
+  ClientInfo: require("./ClientInfo")(sequelize, DataTypes),
 };
 
 module.exports = db;
