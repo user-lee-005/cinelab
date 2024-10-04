@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Loader from "./Loader";
+import ConfirmationModal from "./ConfirmationModal";
 
 const ContactUs = () => {
   const { ref: contactUsRef, inView: isContactUsVisible } = useInView({
@@ -19,6 +20,11 @@ const ContactUs = () => {
   const [nameFocused, setNameFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
   const [messageFocused, setMessageFocused] = useState(false);
+
+  //Modal fields
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalTitle, setModalTitle] = useState("");
 
   useEffect(() => {
     if (name && email && message) {
@@ -55,13 +61,7 @@ const ContactUs = () => {
 
   const handleSubmit = async (e) => {
     setIsLoading(true);
-    e.preventDefault(); // Prevent the default form submission
-
-    // Simple validation
-    if (!name || !email) {
-      alert("Name and email are required.");
-      return;
-    }
+    e.preventDefault();
 
     const data = { name, email, message };
 
@@ -76,7 +76,12 @@ const ContactUs = () => {
 
       if (response.ok) {
         const result = await response.json();
-        alert("Client details saved successfully!");
+        setIsModalOpen(true);
+        setModalTitle("Thank you for reaching out!");
+        setModalMessage(`We appreciate you contacting us. One of our representatives will get back to you shortly.
+          In the meantime, feel free to browse through our website for more information. 
+          If your inquiry is urgent, please use the contact information provided on our site to speak with us directly.
+          Thank you for your interest, and we look forward to assisting you!`);
         console.log("Saved client:", result);
 
         // Reset form fields
@@ -85,11 +90,23 @@ const ContactUs = () => {
         setMessage("");
       } else {
         const errorData = await response.json();
-        alert(`Error: ${errorData.error}`);
+        setIsModalOpen(true);
+        setModalTitle("Submission Failed");
+        setModalMessage(
+          `We encountered an issue while processing your request. Error: ${
+            errorData.error || "Unknown error"
+          }.
+        Please try again later or reach out to us directly through the contact information provided on our website.
+        We apologize for the inconvenience.`
+        );
       }
     } catch (error) {
       console.error("Error saving client details:", error);
-      alert("An error occurred while saving the client details.");
+      setIsModalOpen(true);
+      setModalTitle("We apologize for the inconvenience.");
+      setModalMessage(
+        "Should you need further assistance, please do not hesitate to contact us at the phone number provided below or via email."
+      );
     }
     setIsLoading(false);
   };
@@ -221,6 +238,14 @@ const ContactUs = () => {
           </form>
         </div>
       </section>
+      {isModalOpen && (
+        <ConfirmationModal
+          isOpen={isModalOpen}
+          message={modalMessage}
+          title={modalTitle}
+          setIsOpen={setIsModalOpen}
+        />
+      )}
     </>
   );
 };
