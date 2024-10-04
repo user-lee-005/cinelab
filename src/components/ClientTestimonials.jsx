@@ -14,7 +14,7 @@ const Testimonials = () => {
 
   const testimonials = [
     {
-      name: "Vetrimaaran",
+      name: "John Doe",
       role: "Filmmaker",
       quote:
         "Cinelab transformed my footage into a breathtaking masterpiece! Their attention to detail and color grading expertise brought my vision to life.",
