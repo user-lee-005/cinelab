@@ -1,5 +1,6 @@
 import { useInView } from "react-intersection-observer";
 import React, { useEffect, useState } from "react";
+import DownloadButton from "./DownloadButton";
 
 const Home = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -50,6 +51,9 @@ const Home = () => {
           truly stand out. Discover how we can transform your footage into a
           captivating masterpiece.
         </p>
+        <div>
+          <DownloadButton link={"https://drive.google.com/file/d/1zxuahVcD-KAmtztvKAGzZnSIjdT_JMyp/view?usp=drive_link"} content={"View Brouchre"} displayIcon={"book"}/>
+        </div>
       </div>
 
       <img
