@@ -66,10 +66,10 @@ const Footer = () => {
             <p className="text-sm mt-1">
               <FontAwesomeIcon icon={faEnvelope} />
               <a
-                href="mailto:info.cinelab@gmail.com"
+                href="mailto:info.cinelab05@gmail.com"
                 className="hover:underline ml-2"
               >
-                info.cinelab@gmail.com
+                info.cinelab05@gmail.com
               </a>
             </p>
             <p className="text-sm mt-1">

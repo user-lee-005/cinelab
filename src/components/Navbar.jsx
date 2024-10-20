@@ -37,9 +37,9 @@ const Navbar = () => {
           >
             Our Work
           </a>
-          <a href="#client-testimonials" className="hover:text-gray-400">
+          {/* <a href="#client-testimonials" className="hover:text-gray-400">
             Client Testimonials
-          </a>
+          </a> */}
           <a href="#contact-us" className="hover:text-gray-400">
             Contact Us
           </a>
