@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useInView } from "react-intersection-observer";
+import emailjs from "emailjs-com";
 
 const ContactUs = () => {
   const { ref: contactUsRef, inView: isContactUsVisible } = useInView({
@@ -9,6 +10,10 @@ const ContactUs = () => {
   const [nameFocused, setNameFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
   const [messageFocused, setMessageFocused] = useState(false);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleFocus = (setFocused) => (e) => {
     if (e.target.value !== "") {
@@ -20,6 +25,34 @@ const ContactUs = () => {
     if (e.target.value === "") {
       setFocused(false);
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const templateParams = {
+      from_name: name,
+      to_Name: "Cinelab",
+      message: JSON.stringify({ message, email }),
+    };
+
+    emailjs
+      .send(
+        "service_r0jkfra", // Replace with your EmailJS service ID
+        "template_2v2qlty", // Replace with your EmailJS template ID
+        templateParams,
+        "mveWdrg-rKJ4M6I34" // Replace with your EmailJS user ID
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          alert("Message sent successfully!");
+        },
+        (err) => {
+          console.error("FAILED...", err);
+          alert("Failed to send message. Please try again.");
+        }
+      );
   };
 
   return (
@@ -69,7 +102,11 @@ const ContactUs = () => {
                 id="name"
                 onFocus={() => setNameFocused(true)}
                 onBlur={handleBlur(setNameFocused)}
-                onChange={handleFocus(setNameFocused)}
+                onChange={(e) => {
+                  handleFocus(setNameFocused);
+                  setName(e.target.value);
+                }}
+                value={name}
                 className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400"
                 placeholder={nameFocused && "Enter your name"}
               />
@@ -92,7 +129,11 @@ const ContactUs = () => {
                 id="email"
                 onFocus={() => setEmailFocused(true)}
                 onBlur={handleBlur(setEmailFocused)}
-                onChange={handleFocus(setEmailFocused)}
+                onChange={(e) => {
+                  handleFocus(setEmailFocused);
+                  setEmail(e.target.value);
+                }}
+                value={email}
                 className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400"
                 placeholder={emailFocused && "Enter your email"}
               />
@@ -116,7 +157,11 @@ const ContactUs = () => {
               rows="4"
               onFocus={() => setMessageFocused(true)}
               onBlur={handleBlur(setMessageFocused)}
-              onChange={handleFocus(setMessageFocused)}
+              onChange={(e) => {
+                handleFocus(setMessageFocused);
+                setMessage(e.target.value);
+              }}
+              value={message}
               className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400"
               placeholder={messageFocused && "Your message"}
             />
@@ -125,6 +170,7 @@ const ContactUs = () => {
           <button
             type="submit"
             className="px-6 py-3 bg-blue-700 text-white font-semibold rounded-md hover:bg-blue-900 transition-colors duration-300"
+            onClick={handleSubmit}
           >
             Submit
           </button>
