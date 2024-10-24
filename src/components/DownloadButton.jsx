@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import RegistrationModal from "./ResgistrationModal";
 import emailjs from "emailjs-com";
+import Loader from "./Loader";
 
 const DownloadButton = ({ link, content, displayIcon }) => {
   const [openModal, setOpenModal] = useState();
@@ -14,12 +15,16 @@ const DownloadButton = ({ link, content, displayIcon }) => {
     profession: "",
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleOpenRegisterationModal = () => {
     setOpenModal(true);
   };
 
   const onConfirm = (e) => {
     e.preventDefault();
+
+    setIsLoading(true);
 
     emailjs
       .send(
@@ -30,6 +35,7 @@ const DownloadButton = ({ link, content, displayIcon }) => {
       )
       .then(
         (response) => {
+          setIsLoading(false);
           console.log("SUCCESS!", response.status, response.text);
           const a = document.createElement("a");
           a.href = link;
@@ -72,6 +78,10 @@ const DownloadButton = ({ link, content, displayIcon }) => {
           setFormData={setFormData}
         />
       )}
+
+      {
+        isLoading && <Loader />
+      }
     </div>
   );
 };
