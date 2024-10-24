@@ -12,7 +12,7 @@ describe("Navbar Unit Test Cases", () => {
 
   it("should render the nav list items", () => {
     render(<Navbar />);
-    const navItems = ["Home", "About Us", "Contact Us", "Client Testimonials"];
+    const navItems = ["Home", "About Us", "Contact Us"];
     navItems.forEach((navItem) =>
       expect(screen.getByText(navItem)).toBeInTheDocument()
     );
@@ -21,7 +21,7 @@ describe("Navbar Unit Test Cases", () => {
   it("should show the menu items when closed menu is toggled", () => {
     render(<Navbar />);
     fireEvent.click(screen.getByTestId("fontAwesomIcon"));
-    const navItems = ["Home", "About Us", "Contact Us", "Client Testimonials"];
+    const navItems = ["Home", "About Us", "Contact Us"];
     navItems.forEach((navItem) =>
       expect(screen.getAllByText(navItem)).toHaveLength(2)
     );
@@ -31,7 +31,7 @@ describe("Navbar Unit Test Cases", () => {
     render(<Navbar />);
     fireEvent.click(screen.getByTestId("fontAwesomIcon"));
     fireEvent.click(screen.getByTestId("fontAwesomIcon"));
-    const navItems = ["Home", "About Us", "Contact Us", "Client Testimonials"];
+    const navItems = ["Home", "About Us", "Contact Us"];
     navItems.forEach((navItem) =>
       expect(screen.getAllByText(navItem)).toHaveLength(1)
     );

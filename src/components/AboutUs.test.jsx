@@ -1,50 +1,56 @@
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import AboutUs from "./AboutUs";
 import { useInView } from "react-intersection-observer";
 
+// Mock the useInView hook
 jest.mock("react-intersection-observer", () => ({
   useInView: jest.fn(),
 }));
 
-describe("AboutUs Unit Test Cases", () => {
-  let mockInView = jest.fn();
-
+describe("AboutUs Component Unit Test", () => {
   beforeEach(() => {
-    cleanup();
-    mockInView.mockClear();
-    useInView.mockReturnValue({
-      ref: jest.fn(),
-      inView: mockInView,
-    });
+    jest.clearAllMocks();
   });
 
   it("should render the AboutUs component correctly", () => {
-    mockInView.mockReturnValue(false);
+    useInView.mockReturnValue({
+      ref: jest.fn(),
+      inView: false,
+    });
     const { container } = render(<AboutUs />);
     expect(container).toBeInTheDocument();
   });
 
-  it("should render the 'Our Team' heading", () => {
-    mockInView.mockReturnValue(false);
+  it("should render the 'Our Team' section with correct member details", () => {
+    useInView.mockReturnValue({
+      ref: jest.fn(),
+      inView: false,
+    });
     render(<AboutUs />);
-    const heading = screen.getByText("Our Team");
-    expect(heading).toBeInTheDocument();
+
+    const teamHeading = screen.getByText("Our Team");
+    expect(teamHeading).toBeInTheDocument();
+
+    const memberName = screen.getByText("Leela Venkatesh V");
+    const memberRole = screen.getByText("Founder, Cheif Colorist");
+    expect(memberName).toBeInTheDocument();
+    expect(memberRole).toBeInTheDocument();
+
+    const memberImage = screen.getByAltText("Leela");
+    expect(memberImage).toHaveAttribute("src", "/Leela.jpg");
   });
 
-  it("should render the team member's name and role", () => {
-    mockInView.mockReturnValue(false);
+  it("should render the About Us section with correct content", () => {
+    useInView.mockReturnValue({
+      ref: jest.fn(),
+      inView: false,
+    });
     render(<AboutUs />);
-    const name = screen.getByText("Leela Venkatesh V");
-    const role = screen.getByText("Founder, Cheif Colorist");
-    expect(name).toBeInTheDocument();
-    expect(role).toBeInTheDocument();
-  });
 
-  it("should render the About Us section with the correct content", () => {
-    mockInView.mockReturnValue(false);
-    render(<AboutUs />);
     const aboutUsHeading = screen.getByText("About Us");
+    expect(aboutUsHeading).toBeInTheDocument();
+
     const aboutUsListItems = [
       "Experts in cinematic color grading and video editing",
       "Transforming raw footage into breathtaking visual stories",
@@ -52,16 +58,22 @@ describe("AboutUs Unit Test Cases", () => {
       "Dedicated to making your projects stand out and inspire",
       "Your vision, brought to life with unmatched creativity",
     ];
-    expect(aboutUsHeading).toBeInTheDocument();
+
     aboutUsListItems.forEach((item) => {
       expect(screen.getByText(item)).toBeInTheDocument();
     });
   });
 
-  it("should render the Why Us section with the correct content", () => {
-    mockInView.mockReturnValue(false);
+  it("should render the Why Us section with correct content", () => {
+    useInView.mockReturnValue({
+      ref: jest.fn(),
+      inView: false,
+    });
     render(<AboutUs />);
+
     const whyUsHeading = screen.getByText("Why Us");
+    expect(whyUsHeading).toBeInTheDocument();
+
     const whyUsListItems = [
       "Industry-leading expertise in color grading and editing",
       "Collaborative approach to ensure your vision is achieved",
@@ -70,27 +82,49 @@ describe("AboutUs Unit Test Cases", () => {
       "Timely delivery with uncompromising quality",
       "Trusted by professionals in film, TV, and digital media",
     ];
-    expect(whyUsHeading).toBeInTheDocument();
+
     whyUsListItems.forEach((item) => {
       expect(screen.getByText(item)).toBeInTheDocument();
     });
   });
 
-  it("should apply the correct animation classes when in view", () => {
-    mockInView.mockReturnValue(true);
+  it("should apply animation classes when sections are in view", async () => {
+    // Mock the first "useInView" call for the "Our Team" section
+    useInView
+      .mockReturnValueOnce({ ref: jest.fn(), inView: true }) // Mock for "Our Team"
+      .mockReturnValueOnce({ ref: jest.fn(), inView: true }) // Mock for "About Us"
+      .mockReturnValueOnce({ ref: jest.fn(), inView: true }) // Mock for "Why Us"
+      .mockReturnValueOnce({ ref: jest.fn(), inView: true }); // Mock for "Why Us"
+
     render(<AboutUs />);
+
+    await waitFor(() => {
+      const teamHeading = screen.getByText("Our Team");
+      const aboutUsHeading = screen.getByText("About Us");
+      const whyUsHeading = screen.getByText("Why Us");
+
+      expect(teamHeading).toHaveClass("animate-slide-in-left");
+      expect(aboutUsHeading).toHaveClass("animate-slide-in-left");
+      expect(whyUsHeading).toHaveClass("animate-slide-in-left");
+    });
+  });
+
+  it("should not apply animation classes when sections are not in view", () => {
+    // Mock the sections to be out of view
+    useInView
+      .mockReturnValueOnce({ ref: jest.fn(), inView: false }) // Mock for "Our Team"
+      .mockReturnValueOnce({ ref: jest.fn(), inView: false }) // Mock for "About Us"
+      .mockReturnValueOnce({ ref: jest.fn(), inView: false }); // Mock for "Why Us"
+
+    render(<AboutUs />);
+
     const teamHeading = screen.getByText("Our Team");
     const aboutUsHeading = screen.getByText("About Us");
     const whyUsHeading = screen.getByText("Why Us");
-    expect(teamHeading).toHaveClass("animate-slide-in-left");
-    expect(aboutUsHeading).toHaveClass("animate-slide-in-left");
-    expect(whyUsHeading).toHaveClass("animate-slide-in-left");
-  });
 
-  it("should display the team member image with correct source", () => {
-    mockInView.mockReturnValue(false);
-    render(<AboutUs />);
-    const teamImage = screen.getByAltText("Leela");
-    expect(teamImage).toHaveAttribute("src", "/Leela.jpg");
+    // Check if the animation classes are not applied when inView is false
+    expect(teamHeading).not.toHaveClass("animate-slide-in-left");
+    expect(aboutUsHeading).not.toHaveClass("animate-slide-in-left");
+    expect(whyUsHeading).not.toHaveClass("animate-slide-in-left");
   });
 });

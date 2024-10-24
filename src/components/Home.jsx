@@ -3,22 +3,6 @@ import React, { useEffect, useState } from "react";
 import DownloadButton from "./DownloadButton";
 
 const Home = () => {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const { ref: homeRef, inView: isHomeVisible } = useInView({
     threshold: 0.1,
   });
@@ -34,7 +18,7 @@ const Home = () => {
       >
         <h1
           className={`text-5xl font-extrabold mb-4 leading-tight ${
-            isHomeVisible ? "animate-fade-in-title" : "opactiy-0"
+            isHomeVisible ? "animate-fade-in-title" : "opacity-0"
           }`}
         >
           Welcome to Cinelab!
