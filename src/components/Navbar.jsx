@@ -19,7 +19,7 @@ const Navbar = () => {
           <FontAwesomeIcon
             icon={showMenu ? faX : faBars}
             onClick={toggleMenu}
-            className="text-3xl cursor-pointer"
+            className="text-3xl cursor-pointer text-white"
             data-testid="fontAwesomIcon"
           />
         </div>
@@ -47,7 +47,7 @@ const Navbar = () => {
       </div>
 
       {showMenu && (
-        <div className="md:hidden bg-gray-700">
+        <div className="md:hidden bg-gray-700 text-white">
           <a
             href="#home"
             className="block px-4 py-2 text-sm hover:bg-gray-600"
