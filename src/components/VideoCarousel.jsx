@@ -15,9 +15,11 @@ const VideoCarousel = ({ videos, title, bgColor, cardColor, textColor }) => {
   const [hovered, setHovered] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false); // Track if videos are loaded
   const timerRef = useRef(null);
   const playerRef = useRef(null);
   const progressIntervalRef = useRef(null);
+  const carouselRef = useRef(null); // Reference to carousel for lazy loading
 
   const nextSlide = () => {
     setCurrentSlide((prevSlide) =>
@@ -45,6 +47,26 @@ const VideoCarousel = ({ videos, title, bgColor, cardColor, textColor }) => {
 
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => setHovered(false);
+
+  // Lazy loading with Intersection Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsLoaded(true); // Set videos as loaded once visible
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    if (carouselRef.current) {
+      observer.observe(carouselRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (timerRef.current) {
@@ -89,6 +111,7 @@ const VideoCarousel = ({ videos, title, bgColor, cardColor, textColor }) => {
 
   return (
     <section
+      ref={carouselRef} // Ref for Intersection Observer
       className={`relative flex flex-col items-center justify-center min-h-fit ${bgColor} ${textColor} py-14 sm:py-28`}
     >
       <h2 className="text-2xl sm:text-4xl font-extrabold mb-2 leading-tight pb-4 sm:pb-6">
@@ -105,16 +128,18 @@ const VideoCarousel = ({ videos, title, bgColor, cardColor, textColor }) => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <ReactPlayer
-                ref={playerRef}
-                url={videos[currentSlide].src}
-                playing={isPlaying}
-                controls={false}
-                style={playerStyles}
-                className="rounded-lg mb-4"
-                onEnded={handleVideoEnd}
-                onDuration={handleDuration}
-              />
+              {isLoaded && (
+                <ReactPlayer
+                  ref={playerRef}
+                  url={videos[currentSlide].src}
+                  playing={isPlaying}
+                  controls={false}
+                  style={playerStyles}
+                  className="rounded-lg mb-4"
+                  onEnded={handleVideoEnd}
+                  onDuration={handleDuration}
+                />
+              )}
 
               {hovered && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 rounded-lg">
