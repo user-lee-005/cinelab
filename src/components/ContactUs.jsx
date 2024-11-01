@@ -38,10 +38,10 @@ const ContactUs = () => {
 
     emailjs
       .send(
-        "service_r0jkfra", // Replace with your EmailJS service ID
-        "template_2v2qlty", // Replace with your EmailJS template ID
+        "service_r0jkfra",
+        "template_2v2qlty",
         templateParams,
-        "mveWdrg-rKJ4M6I34" // Replace with your EmailJS user ID
+        "mveWdrg-rKJ4M6I34"
       )
       .then(
         (response) => {
@@ -59,9 +59,9 @@ const ContactUs = () => {
     <section
       id="contact-us"
       ref={contactUsRef}
-      className="relative flex items-center justify-around min-h-screen bg-gray-900 w-full text-white overflow-hidden pt-20 px-4 md:px-8"
+      className="relative flex items-center justify-around min-h-screen bg-gray-900 text-white overflow-hidden pt-20 px-4 md:px-8 lg:px-0 lg:w-full"
     >
-      <div className="relative z-10 flex flex-col items-start justify-center px-4 md:px-8 space-y-6 w-full max-w-lg mx-auto">
+      <div className="relative z-10 flex flex-col items-start justify-center px-4 md:px-8 lg:px-20 space-y-6 w-full lg:max-w-none max-w-lg mx-auto">
         <h2
           className={`text-3xl md:text-4xl font-extrabold mb-4 leading-tight ${
             isContactUsVisible ? "animate-fade-in-para" : "opacity-0"

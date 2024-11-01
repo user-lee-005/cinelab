@@ -57,7 +57,6 @@ const Footer = () => {
 
         {/* Contact Information */}
         <div className="mb-6 md:mb-0 flex flex-col">
-          <h3 className="text-lg font-semibold">Contact Us</h3>
           <p className="text-sm mt-2">
             <FontAwesomeIcon icon={faHouse} className="mr-2" />
             Kuniamuthur, Coimbatore, Tamil Nadu - 641008
