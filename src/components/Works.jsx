@@ -24,11 +24,11 @@ const gradedVideos = [
     description:
       "This is a drone shot that we changed from the log footage to a graded one elevating the feel of the scene and the scenary",
   },
-  // {
-  //   src: "/path/to/graded-video2.mp4",
-  //   title: "Graded Video 2",
-  //   description: "Description of Graded Video 2",
-  // },
+  {
+    src: "/Videos/DayToNight.mp4",
+    title: "Day to Night Transitions",
+    description: "See Cinelab’s craft in action as we transform raw footage into a stunning day-to-night scene, capturing the landscape's depth and vibrancy through expert grading.",
+  },
   // Add more videos as needed
 ];
 
