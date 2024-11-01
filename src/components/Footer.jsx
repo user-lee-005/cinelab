@@ -56,13 +56,13 @@ const Footer = () => {
         </nav> */}
 
         {/* Contact Information */}
-        <div className="mb-6 md:mb-0 flex flex-col">
-          <p className="text-sm mt-2">
-            <FontAwesomeIcon icon={faHouse} className="mr-2" />
+        <div className="flex flex-col items-start space-y-2 text-center md:text-left">
+          <p className="text-sm flex items-center justify-center md:justify-start mt-2">
+            <FontAwesomeIcon icon={faHouse} className="mr-2 mb-2 pb-3 md:mb-0 md:pb-0" />
             Kuniamuthur, Coimbatore, Tamil Nadu - 641008
           </p>
-          <div className="flex space-x-4">
-            <p className="text-sm mt-1">
+          <div className="flex flex-col space-y-1 md:space-x-4 md:flex-row">
+            <p className="text-sm flex items-center">
               <FontAwesomeIcon icon={faEnvelope} />
               <a
                 href="mailto:info.cinelab05@gmail.com"
@@ -71,7 +71,7 @@ const Footer = () => {
                 info.cinelab05@gmail.com
               </a>
             </p>
-            <p className="text-sm mt-1">
+            <p className="text-sm flex items-center">
               <FontAwesomeIcon icon={faPhone} />
               <a href="tel:+1234567890" className="hover:underline ml-2">
                 +91-9080675237
@@ -80,13 +80,13 @@ const Footer = () => {
           </div>
         </div>
 
-        <p className="text-sm pr-48">
+        {/* Copyright */}
+        <p className="text-xs md:text-sm text-center order-last md:order-none">
           &copy; 2024 Cinelab. All rights reserved.
         </p>
 
         {/* Social Media Links */}
-        {/* Reduce the margin if any links are added */}
-        <div className="flex space-x-4">
+        <div className="flex justify-center space-x-4 lg:ml-48">
           {/* <div className="relative group border-2 rounded-md">
             <a
               href="https://facebook.com"
@@ -117,7 +117,7 @@ const Footer = () => {
               <span className="absolute inset-0 bg-blue-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-md"></span>
             </a>
           </div> */}
-          <div className="relative group border-2 rounded-md">
+          <div className="relative group border-2 rounded-md m-4">
             <a
               href="https://www.instagram.com/_.cinelab._/"
               target="_blank"
