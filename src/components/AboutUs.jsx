@@ -26,12 +26,12 @@ const AboutUs = () => {
 
   return (
     <section
-      className="relative flex items-center justify-around min-h-screen bg-gray-900 text-white overflow-hidden pb-20 pt-20"
+      className="relative flex flex-col lg:flex-row items-center justify-around min-h-screen bg-gray-900 text-white overflow-hidden pb-20 pt-20"
       id="about-us"
     >
       <div>
         <h2
-          className={`text-4xl font-extrabold leading-tight ${
+          className={`text-4xl text-center font-extrabold leading-tight ${
             isAboutUsVisible ? "animate-slide-in-left" : "opacity-0"
           }`}
         >
@@ -43,7 +43,7 @@ const AboutUs = () => {
               <img
                 src={`/${member.image}`}
                 alt="Leela"
-                className={`w-96 mt-12 transform transition-transform block duration-1000 hover:scale-105 ${
+                className={`w-64 mt-6 lg:mt-12 lg:w-96 transform transition-transform block duration-1000 hover:scale-105 ${
                   isAboutUsVisible ? "animate-slide-up" : "opacity-0"
                 }`}
               />
@@ -54,7 +54,7 @@ const AboutUs = () => {
           </div>
         ))}
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-8 lg:mt-0">
         <div
           ref={aboutUsRef}
           className={`relative z-10 flex flex-col items-start justify-center px-8 max-w-2xl w-full mb-12 ${
@@ -62,14 +62,14 @@ const AboutUs = () => {
           }`}
         >
           <h2
-            className={`text-4xl font-extrabold mb-4 leading-tight ${
+            className={`text-2xl lg:text-4xl font-extrabold mb-4 leading-tight ${
               isAboutUsVisible ? "animate-slide-in-left" : "opacity-0"
             }`}
           >
             About Us
           </h2>
           <ul
-            className={`list-disc list-inside text-lg leading-relaxed space-y-3 ${
+            className={`list-disc list-inside text-sm lg:text-lg leading-relaxed space-y-3 ${
               isAboutUsVisible ? "animate-fade-in-para" : "opacity-0"
             }`}
           >
@@ -88,14 +88,14 @@ const AboutUs = () => {
           }`}
         >
           <h2
-            className={`text-4xl font-extrabold mb-4 leading-tight ${
+            className={`text-2xl lg:text-4xl font-extrabold mb-4 leading-tight ${
               isWhyUsVisible ? "animate-slide-in-left" : "opacity-0"
             }`}
           >
             Why Us
           </h2>
           <ul
-            className={`list-disc list-inside text-lg leading-relaxed space-y-3 ${
+            className={`list-disc list-inside text-sm lg:text-lg leading-relaxed space-y-3 ${
               isWhyUsVisible ? "animate-fade-in-para" : "opacity-0"
             }`}
           >

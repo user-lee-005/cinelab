@@ -59,18 +59,18 @@ const ContactUs = () => {
     <section
       id="contact-us"
       ref={contactUsRef}
-      className="relative flex items-center justify-around min-h-screen bg-gray-900 w-full text-white overflow-hidden pt-20"
+      className="relative flex items-center justify-around min-h-screen bg-gray-900 w-full text-white overflow-hidden pt-20 px-4 md:px-8"
     >
-      <div className="relative z-10 flex flex-col items-start justify-center px-8 space-y-6">
+      <div className="relative z-10 flex flex-col items-start justify-center px-4 md:px-8 space-y-6 w-full max-w-lg mx-auto">
         <h2
-          className={`text-4xl font-extrabold mb-4 leading-tight ${
+          className={`text-3xl md:text-4xl font-extrabold mb-4 leading-tight ${
             isContactUsVisible ? "animate-fade-in-para" : "opacity-0"
           }`}
         >
           Contact Us
         </h2>
         <p
-          className={`text-lg leading-relaxed ${
+          className={`text-md md:text-lg leading-relaxed ${
             isContactUsVisible ? "animate-fade-in-para" : "opacity-0"
           }`}
         >
@@ -83,14 +83,12 @@ const ContactUs = () => {
             isContactUsVisible ? "animate-slide-in-left" : "opacity-0"
           }`}
         >
-          {/* Flex container for Name and Email */}
           <div className="flex flex-col md:flex-row md:space-x-4 mb-8">
-            {/* Name Input */}
-            <div className="relative w-full md:w-1/2">
+            <div className="relative w-full md:w-1/2 mb-6 md:mb-0">
               <label
-                className={`absolute left-4 top-1 text-lg font-semibold transition-all duration-300 ${
+                className={`absolute left-4 top-1 text-sm font-semibold transition-all duration-300 ${
                   nameFocused
-                    ? "transform -translate-x-1 -translate-y-6 bg-gray-900 w-16 flex rounded-md justify-center text-md text-gray-400"
+                    ? "transform -translate-x-1 -translate-y-6 bg-gray-900 w-16 flex rounded-md justify-center text-gray-400"
                     : ""
                 }`}
                 htmlFor="name"
@@ -107,17 +105,16 @@ const ContactUs = () => {
                   setName(e.target.value);
                 }}
                 value={name}
-                className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400"
+                className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400 text-sm"
                 placeholder={nameFocused && "Enter your name"}
               />
             </div>
 
-            {/* Email Input */}
-            <div className="relative w-full md:w-1/2 mt-8 md:mt-0">
+            <div className="relative w-full md:w-1/2">
               <label
-                className={`absolute left-4 top-1 text-lg font-semibold transition-all duration-300 ${
+                className={`absolute left-4 top-1 text-sm font-semibold transition-all duration-300 ${
                   emailFocused
-                    ? "transform -translate-x-1 -translate-y-6 bg-gray-900 w-16 flex rounded-md justify-center text-md text-gray-400"
+                    ? "transform -translate-x-1 -translate-y-6 bg-gray-900 w-16 flex rounded-md justify-center text-gray-400"
                     : ""
                 }`}
                 htmlFor="email"
@@ -134,18 +131,17 @@ const ContactUs = () => {
                   setEmail(e.target.value);
                 }}
                 value={email}
-                className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400"
+                className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400 text-sm"
                 placeholder={emailFocused && "Enter your email"}
               />
             </div>
           </div>
 
-          {/* Message Input */}
           <div className="mb-8 mt-4 relative">
             <label
-              className={`absolute left-4 top-1 text-lg font-semibold transition-all duration-300 ${
+              className={`absolute left-4 top-1 text-sm font-semibold transition-all duration-300 ${
                 messageFocused
-                  ? "transform -translate-x-1 -translate-y-6 bg-gray-900 w-24 flex rounded-md justify-center text-md text-gray-400"
+                  ? "transform -translate-x-1 -translate-y-6 bg-gray-900 w-24 flex rounded-md justify-center text-gray-400"
                   : ""
               }`}
               htmlFor="message"
@@ -162,14 +158,14 @@ const ContactUs = () => {
                 setMessage(e.target.value);
               }}
               value={message}
-              className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400"
+              className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400 text-sm"
               placeholder={messageFocused && "Your message"}
             />
           </div>
 
           <button
             type="submit"
-            className="px-6 py-3 bg-blue-700 text-white font-semibold rounded-md hover:bg-blue-900 transition-colors duration-300"
+            className="w-full px-6 py-3 bg-blue-700 text-white font-semibold rounded-md hover:bg-blue-900 transition-colors duration-300 text-sm md:text-base"
             onClick={handleSubmit}
           >
             Submit
