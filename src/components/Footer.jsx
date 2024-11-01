@@ -86,6 +86,7 @@ const Footer = () => {
         </p>
 
         {/* Social Media Links */}
+        {/* Reduce the margin if any links are added */}
         <div className="flex space-x-4">
           {/* <div className="relative group border-2 rounded-md">
             <a
