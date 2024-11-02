@@ -106,7 +106,7 @@ const ContactUs = () => {
                 }}
                 value={name}
                 className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400 text-sm"
-                placeholder={nameFocused && "Enter your name"}
+                placeholder={nameFocused ? "Enter your name" : ""}
               />
             </div>
 
@@ -132,7 +132,7 @@ const ContactUs = () => {
                 }}
                 value={email}
                 className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400 text-sm"
-                placeholder={emailFocused && "Enter your email"}
+                placeholder={emailFocused ? "Enter your email" : ""}
               />
             </div>
           </div>
@@ -159,7 +159,7 @@ const ContactUs = () => {
               }}
               value={message}
               className="w-full px-4 py-2 bg-gray-700 text-white rounded-md border-none focus:ring-2 focus:ring-gray-400 text-sm"
-              placeholder={messageFocused && "Your message"}
+              placeholder={messageFocused ? "Your message" : ""}
             />
           </div>
 
