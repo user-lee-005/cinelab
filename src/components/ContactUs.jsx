@@ -63,10 +63,10 @@ const ContactUs = () => {
     setIsLoading(true);
     e.preventDefault();
 
-    const data = { name, email, message };
+    const data = { name, email, message, isBrochureDownloadDetails: false };
 
     try {
-      const response = await fetch("https://cinelab-server.onrender.com//api/saveClientInfo", {
+      const response = await fetch("https://cinelab-server.onrender.com/api/saveClientInfo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

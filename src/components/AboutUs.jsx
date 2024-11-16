@@ -10,15 +10,7 @@ const AboutUs = () => {
   const { ref: whyUsRef, inView: isWhyUsVisible } = useInView({
     threshold: 0.1,
   });
-
-  // const teamMembersList = [
-  //   {
-  //     name: "Leela Venkatesh V",
-  //     role: "Founder, Cheif Colorist",
-  //     image: "Leela.jpg",
-  //   },
-  // ];
-
+  
   const [teamMembers, setTeamMembers] = useState([]);
 
   useEffect(() => {

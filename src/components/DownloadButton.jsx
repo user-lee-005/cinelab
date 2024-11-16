@@ -1,18 +1,22 @@
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import ConfirmationModal from "./ConfirmationModal";
 import RegistrationModal from "./ResgistrationModal";
-import emailjs from "emailjs-com";
 import Loader from "./Loader";
 
 const DownloadButton = ({ link, content, displayIcon }) => {
   const [openModal, setOpenModal] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalTitle, setModalTitle] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
     email: "",
     profession: "",
+    isBrochureDownloadDetails: true,
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -21,19 +25,25 @@ const DownloadButton = ({ link, content, displayIcon }) => {
     setOpenModal(true);
   };
 
-  const onConfirm = (e) => {
+  const onConfirm = async (e) => {
     e.preventDefault();
 
     setIsLoading(true);
 
-    emailjs
-      .send(
-        "service_ef4muf8", // Replace with your EmailJS service ID
-        "template_dlx5ruf", // Replace with your EmailJS template ID
-        formData,
-        "mveWdrg-rKJ4M6I34" // Replace with your EmailJS user ID
-      )
-      .then(
+    setIsLoading(true);
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        "https://cinelab-server.onrender.com/api/saveClientInfo",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      ).then(
         (response) => {
           setIsLoading(false);
           console.log("SUCCESS!", response.status, response.text);
@@ -51,6 +61,15 @@ const DownloadButton = ({ link, content, displayIcon }) => {
           alert("Failed to send message. Please try again.");
         }
       );
+    } catch (error) {
+      console.error("Error saving client details:", error);
+      setIsModalOpen(true);
+      setModalTitle("We apologize for the inconvenience.");
+      setModalMessage(
+        "Should you need further assistance, please do not hesitate to contact us at the phone number provided below or via email."
+      );
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -79,9 +98,16 @@ const DownloadButton = ({ link, content, displayIcon }) => {
         />
       )}
 
-      {
-        isLoading && <Loader />
-      }
+      {isModalOpen && (
+        <ConfirmationModal
+          isOpen={isModalOpen}
+          message={modalMessage}
+          title={modalTitle}
+          setIsOpen={setIsModalOpen}
+        />
+      )}
+
+      {isLoading && <Loader />}
     </div>
   );
 };
