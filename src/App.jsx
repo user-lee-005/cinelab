@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
@@ -8,6 +8,7 @@ import ClientTestimonials from "./components/ClientTestimonials";
 import Footer from "./components/Footer";
 import AddMember from "./components/AddMember";
 import Works from "./components/Works";
+import ShowMembers from "./components/ShowMembers";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
       <Works />
       {/* <ClientTestimonials /> */}
       <ContactUs />
+      <AddMember />
+      <ShowMembers />
       <Footer />
     </div>
   );

@@ -1,6 +1,7 @@
 // AddMember.jsx
 import React, { useState } from "react";
 import axios from "axios";
+import { saveTeamMember } from "../service/Service";
 
 const AddMember = () => {
   const [name, setName] = useState("");
@@ -19,7 +20,9 @@ const AddMember = () => {
     formData.append("role", role);
     formData.append("file", image);
 
-    console.log("formData", formData);
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
 
     try {
       const response = await axios.post(
@@ -31,6 +34,7 @@ const AddMember = () => {
           },
         }
       );
+      // const response = await saveTeamMember(formData, "multipart/form-data");
       console.log(response.data);
     } catch (error) {
       console.error(error);

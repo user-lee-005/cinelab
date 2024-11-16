@@ -1,10 +1,10 @@
 import {
-  faArrowRightArrowLeft,
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import Slider from "react-slick";
 import { useInView } from "react-intersection-observer";
 
 const Testimonials = () => {
@@ -38,24 +38,17 @@ const Testimonials = () => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Function to move to the next slide
-  const nextSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === testimonials.length - 1 ? 0 : prevSlide + 1
-    );
+  const settings = {
+    dots: true,
+    fade: true,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    beforeChange: (current, next) => setCurrentSlide(next),
   };
-
-  // Function to move to the previous slide
-  const prevSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? testimonials.length - 1 : prevSlide - 1
-    );
-  };
-
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 5000); // Slide changes every 5 seconds
-    return () => clearInterval(interval); // Cleanup interval on component unmount
-  }, []);
 
   return (
     <section
@@ -72,19 +65,11 @@ const Testimonials = () => {
       </h2>
 
       <div className="relative w-full overflow-hidden">
-        <div
-          className="flex transition-transform duration-1000 ease-in-out"
-          style={{
-            transform: `translateX(-${
-              currentSlide * (100 / testimonials.length)
-            }%)`,
-            width: `${testimonials.length * 100}%`,
-          }}
-        >
+        <Slider {...settings}>
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4"
+              className="flex-shrink-0 w-full p-4 flex flex-col items-center"
             >
               <div className="relative flex flex-col items-center bg-gray-800 p-8 rounded-lg shadow-lg transition-transform duration-1000 hover:scale-105">
                 <img
@@ -98,9 +83,11 @@ const Testimonials = () => {
               </div>
             </div>
           ))}
-        </div>
+        </Slider>
 
-        {/* Left Arrow */}
+        {/* Optional: You can keep the manual navigation buttons if desired */}
+        {/* Uncomment below if you want to include manual navigation */}
+        {/* 
         <button
           className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-blue-700 text-white p-2 rounded-md bg-opacity-20 hover:bg-opacity-100 shadow-lg hover:bg-blue-900 transition-transform duration-300 transform hover:scale-110 hover:opacity-100"
           onClick={prevSlide}
@@ -108,16 +95,16 @@ const Testimonials = () => {
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
 
-        {/* Right Arrow */}
         <button
           className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-blue-700 text-white p-2 rounded-md bg-opacity-20 hover:bg-opacity-100 shadow-lg hover:bg-blue-900 transition-transform duration-300 transform hover:scale-110 hover:opacity-100"
           onClick={nextSlide}
         >
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
+        */}
       </div>
 
-      {/* Optional: Pagination or Navigation */}
+      {/* Pagination indicators */}
       <div className="absolute bottom-8 flex space-x-2">
         {testimonials.map((_, index) => (
           <div

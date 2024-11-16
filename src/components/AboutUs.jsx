@@ -10,7 +10,7 @@ const AboutUs = () => {
   const { ref: whyUsRef, inView: isWhyUsVisible } = useInView({
     threshold: 0.1,
   });
-
+  
   const [teamMembers, setTeamMembers] = useState([]);
 
   useEffect(() => {
