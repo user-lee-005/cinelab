@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { getTeamMembersList } from "../service/Service";
+import TeamCarousel from "./TeamCarousel";
 
 const AboutUs = () => {
   const { ref: aboutUsRef, inView: isAboutUsVisible } = useInView({
@@ -9,19 +11,19 @@ const AboutUs = () => {
     threshold: 0.1,
   });
 
-  const teamMembersList = [
-    {
-      name: "Leela Venkatesh V",
-      role: "Founder, Cheif Colorist",
-      image: "Leela.jpg",
-    },
-  ];
-
   const [teamMembers, setTeamMembers] = useState([]);
 
   useEffect(() => {
-    // setTeamMembers(getTeamMembersList());
-    setTeamMembers(teamMembersList);
+    const fetchTeamMembers = async () => {
+      try {
+        const teamMembersList = await getTeamMembersList();
+        setTeamMembers(teamMembersList || []);
+      } catch (error) {
+        console.error("Error fetching team members", error);
+      }
+    };
+
+    fetchTeamMembers();
   }, []);
 
   return (
@@ -29,32 +31,11 @@ const AboutUs = () => {
       className="relative flex flex-col lg:flex-row items-center justify-around min-h-screen bg-gray-900 text-white overflow-hidden pb-20 pt-20"
       id="about-us"
     >
-      <div>
-        <h2
-          className={`text-4xl text-center font-extrabold leading-tight ${
-            isAboutUsVisible ? "animate-slide-in-left" : "opacity-0"
-          }`}
-        >
-          Our Team
-        </h2>
-        {teamMembers.map((member, index) => (
-          <div key={`member-${index + 1}`}>
-            <div className="relative inline-block">
-              <img
-                src={`/${member.image}`}
-                alt="Leela"
-                className={`w-64 mt-6 lg:mt-12 lg:w-96 transform transition-transform block duration-1000 hover:scale-105 ${
-                  isAboutUsVisible ? "animate-slide-up" : "opacity-0"
-                }`}
-              />
-              <div className="absolute inset-0 bg-white bg-opacity-0"></div>
-            </div>
-            <p>{member.name}</p>
-            <p>{member.role}</p>
-          </div>
-        ))}
-      </div>
-      <div className="flex flex-col mt-8 lg:mt-0">
+      <TeamCarousel
+        teamMembers={teamMembers}
+        isAboutUsVisible={isAboutUsVisible}
+      />
+      <div className="flex flex-col">
         <div
           ref={aboutUsRef}
           className={`relative z-10 flex flex-col items-start justify-center px-8 max-w-2xl w-full mb-12 ${
