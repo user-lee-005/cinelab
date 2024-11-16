@@ -23,7 +23,7 @@ const AddMember = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/saveTeamMember",
+        "https://cinelab-server.onrender.com/api/saveTeamMember",
         formData,
         {
           headers: {
