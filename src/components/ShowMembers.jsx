@@ -87,7 +87,7 @@ const ShowMembers = () => {
       try {
         // await deleteTeamMember(id);
         await axios
-          .delete(`http://127.0.0.1:3001/api/deleteTeamMember/${id}`)
+          .delete(`https://cinelab-server.onrender.com/api/deleteTeamMember/${id}`)
           .then((response) => response.data)
           .catch((error) => {
             console.error(
@@ -123,7 +123,7 @@ const ShowMembers = () => {
               <td className="border px-4 py-2">{member.role}</td>
               <td className="border px-4 py-2">
                 <img
-                  src={member.image}
+                  src={`data:image/jpeg;base64,${member.image}`}
                   alt={member.name}
                   className="w-20 h-20 object-cover rounded-full"
                 />

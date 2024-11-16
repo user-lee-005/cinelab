@@ -33,7 +33,7 @@ const TeamCarousel = ({ teamMembers, isAboutUsVisible }) => {
               }}
             >
               <img
-                src={member.image}
+                src={`data:image/jpeg;base64,${member.image}`}
                 alt={member.name}
                 className="w-full h-full object-cover"
               />

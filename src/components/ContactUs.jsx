@@ -66,7 +66,7 @@ const ContactUs = () => {
     const data = { name, email, message };
 
     try {
-      const response = await fetch("http://127.0.0.1:3001/api/saveClientInfo", {
+      const response = await fetch("https://cinelab-server.onrender.com//api/saveClientInfo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
