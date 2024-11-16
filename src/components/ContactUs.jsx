@@ -27,32 +27,55 @@ const ContactUs = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const templateParams = {
-      from_name: name,
-      to_Name: "Cinelab",
-      message: JSON.stringify({ message, email }),
-    };
+    const data = { name, email, message };
 
-    emailjs
-      .send(
-        "service_r0jkfra",
-        "template_2v2qlty",
-        templateParams,
-        "mveWdrg-rKJ4M6I34"
-      )
-      .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-          alert("Message sent successfully!");
+    try {
+      const response = await fetch("https://cinelab-server.onrender.com//api/saveClientInfo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        (err) => {
-          console.error("FAILED...", err);
-          alert("Failed to send message. Please try again.");
-        }
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setIsModalOpen(true);
+        setModalTitle("Thank you for reaching out!");
+        setModalMessage(`We appreciate you contacting us. One of our representatives will get back to you shortly.
+          In the meantime, feel free to browse through our website for more information. 
+          If your inquiry is urgent, please use the contact information provided on our site to speak with us directly.
+          Thank you for your interest, and we look forward to assisting you!`);
+        console.log("Saved client:", result);
+
+        // Reset form fields
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        const errorData = await response.json();
+        setIsModalOpen(true);
+        setModalTitle("Submission Failed");
+        setModalMessage(
+          `We encountered an issue while processing your request. Error: ${
+            errorData.error || "Unknown error"
+          }.
+        Please try again later or reach out to us directly through the contact information provided on our website.
+        We apologize for the inconvenience.`
+        );
+      }
+    } catch (error) {
+      console.error("Error saving client details:", error);
+      setIsModalOpen(true);
+      setModalTitle("We apologize for the inconvenience.");
+      setModalMessage(
+        "Should you need further assistance, please do not hesitate to contact us at the phone number provided below or via email."
       );
+    }
+    setIsLoading(false);
   };
 
   return (
